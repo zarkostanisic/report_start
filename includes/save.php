@@ -1,4 +1,5 @@
 <?php
+  if(!file_exists('reports')) mkdir('reports');
 
   $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
   $objWriter->save('./reports/' . $fileName . '.docx');
