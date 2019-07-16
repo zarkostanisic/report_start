@@ -1,6 +1,7 @@
 <?php
   use App\Chart;
   use PhpOffice\PhpWord\Shared\Converter;
+  
 
   $names = array('Broj ocitanih brojila', 'Broj neocitanih - nepristupacnih brojila', 'Broj neocitanih brojila');
 

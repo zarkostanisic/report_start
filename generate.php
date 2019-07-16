@@ -1,5 +1,12 @@
 <?php
+  // Connection
+  require_once('./app/connection.php');
+
+  // Autoload
   require_once('./vendor/autoload.php');
+
+  // Functions
+  require_once('./includes/functions.php');
 
   use PhpOffice\PhpWord\PhpWord;
 
@@ -23,6 +30,8 @@
 
   // Pie chart
   require_once('./elements/pie_chart.php');
+
+  $fileName = 'report';
 
   require_once('./includes/save.php');
  ?>
