@@ -64,8 +64,10 @@
       $ukupno_dodeljena_brojila = 0;
       $ukupno_prosecno_brojila_po_citacu = 0;
 
-      $c_broj_citaca_po_ispostavama = [];
-      $s_broj_citaca_po_ispostavama = [];
+      $c_ispostave = [];
+      $s1_broj_citaca_po_ispostavama = [];
+      $s2_broj_brojila_po_ispostavama = [];
+      $s3_prosecan_broj_brojila_po_citacu_po_ispostavama = [];
 
       while ($row = mysqli_fetch_assoc($sqlQuery)) {
           echo 'u while-u' . '<br>';
@@ -74,13 +76,17 @@
           $vrednost_citaci_dodeljeno = $row['broj_citaca'];
           $vrednost_dodeljena_brojila = $row['broj_brojila'];
 
-          $c_broj_citaca_po_ispostavama[] = $vrednost_ispostava;
-          $s_broj_citaca_po_ispostavama[] = $vrednost_citaci_dodeljeno;
 
           $ukupno_citaci_dodeljeno += $vrednost_citaci_dodeljeno;
           $ukupno_dodeljena_brojila += $vrednost_dodeljena_brojila;
 
           $prosecno_brojila_po_citacu = number_format($vrednost_dodeljena_brojila / $vrednost_citaci_dodeljeno, 2);
+
+          // Charts categories and series
+          $c_ispostave[] = $vrednost_ispostava;
+          $s1_broj_citaca_po_ispostavama[] = $vrednost_citaci_dodeljeno;
+          $s2_broj_brojila_po_ispostavama[] = $vrednost_dodeljena_brojila;
+          $s3_prosecan_broj_brojila_po_citacu_po_ispostavama[] = $prosecno_brojila_po_citacu;
 
           $rows[] = [$vrednost_ispostava, $vrednost_citaci_dodeljeno, $vrednost_dodeljena_brojila, $prosecno_brojila_po_citacu];
       }
@@ -92,8 +98,10 @@
       $rows[] = ['', '', '', ''];
 
       $rows[] = [
-        ['value' => 'Ukupno', 'bold' => 'true'], $ukupno_citaci_dodeljeno,
-        $ukupno_dodeljena_brojila,$ukupno_prosecno_brojila_po_citacu
+        ['value' => 'Ukupno', 'bold' => 'true'],
+        ['value' => $ukupno_citaci_dodeljeno, 'bold' => true],
+        ['value' => $ukupno_dodeljena_brojila, 'bold' => true],
+        ['value' => $ukupno_prosecno_brojila_po_citacu, 'bold' => true]
       ];
 
       // Table
@@ -103,8 +111,17 @@
 
       $section = $phpWord->addSection(array('breakType' => 'continuous'));
 
-      // Chart
+      // Charts
+      // Broj čitača po ispostavama
       $grafik_broj_citaca_po_ispostavama = new Chart('Broj čitača po ispostavama', Converter::inchToEmu(6.5), Converter::inchToEmu(4), false, true, true);
-      $grafik_broj_citaca_po_ispostavama->column($c_broj_citaca_po_ispostavama, $s_broj_citaca_po_ispostavama, 'Broj čitača');
+      $grafik_broj_citaca_po_ispostavama->column($c_ispostave, $s1_broj_citaca_po_ispostavama, 'Broj čitača');
+
+      // Broj brojila po ispostavama
+      $grafik_broj_brojila_po_ispostavama = new Chart('Broj brojila po ispostavama', Converter::inchToEmu(6.5), Converter::inchToEmu(4), false, true, true);
+      $grafik_broj_brojila_po_ispostavama->column($c_ispostave, $s2_broj_brojila_po_ispostavama, 'Broj brojila');
+
+      // Prosečan broj brojila po čitaču po ispostavama
+      $grafik_prosecen_broj_brojila_po_citacu_po_ispostavama = new Chart('Prosečan broj brojila po čitaču po ispostavama', Converter::inchToEmu(6.5), Converter::inchToEmu(4), false, true, true);
+      $grafik_prosecen_broj_brojila_po_citacu_po_ispostavama->column($c_ispostave, $s3_prosecan_broj_brojila_po_citacu_po_ispostavama, 'Prosečan broj brojila po čitaču ');
   }
  ?>
