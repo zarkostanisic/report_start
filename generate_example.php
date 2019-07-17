@@ -10,7 +10,7 @@
 
   use PhpOffice\PhpWord\PhpWord;
 
-  $phpWord = new PhpWord(array());
+  $phpWord = new PhpWord();
 
   $sectionAutoFit = array('marginLeft'=>500, 'marginRight'=>500);
 
@@ -31,7 +31,7 @@
   // Pie chart
   require_once('./elements/pie_chart.php');
 
-  $fileName = 'report';
+  $fileName = 'report-example';
 
   require_once('./includes/save.php');
  ?>

@@ -11,6 +11,12 @@
   use PhpOffice\PhpWord\PhpWord;
 
   $phpWord = new PhpWord();
+  $phpWord->getSettings()->setUpdateFields(true);
+
+  $section = $phpWord->addSection();
+
+  $section->addTOC();
+  $section->addPageBreak();
 
   // Styles
   require_once('./includes/styles.php');

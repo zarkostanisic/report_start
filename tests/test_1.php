@@ -54,7 +54,7 @@
   ";
 
   echo 'pred  upit' . '<br>';
-  //echo 'upit -> '.$sql.'<br>';
+  echo 'upit -> '.$sql.'<br>';
   if ($sqlQuery = mysqli_query($db, $sql)) {
       echo 'u if-u' . '<br>';
       $rows = [];
