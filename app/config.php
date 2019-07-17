@@ -3,5 +3,5 @@
   define('DB_HOST', 'localhost');
   define('DB_USERNAME', 'root');
   define('DB_PASSWORD', '');
-  define('DB_NAME', 'report');
+  define('DB_NAME', 'ord_baza');
  ?>

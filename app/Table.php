@@ -1,6 +1,6 @@
 <?php
   namespace App;
-  
+
   class Table{
     private $style = array(
       'cellMarginLeft' => 50,
